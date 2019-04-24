@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ESkript.Models.LiteratureCard>
+<style>
+    li {
+        margin-top: 1em;
+    }
+</style>
+@*<h4>
+    Literaturverweis:
+</h4>*@
+@foreach (var item in Model) {
+    <div style="position: relative; left: 30px;">
+        <ul>
+            <li>
+                @Html.DisplayFor(modelItem => item.Authors):
+                @Html.DisplayFor(modelItem => item.Titel).
+                <br />
+                Verlag:
+                @Html.DisplayFor(modelItem => item.Publisher),
+                Edition:
+                @Html.DisplayFor(modelItem => item.Edition),
+                Ort:
+                @Html.DisplayFor(modelItem => item.Location),
+                @Html.DisplayFor(modelItem => item.Year)
+            </li>
+        </ul>
+    </div>
+}

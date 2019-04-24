@@ -1,0 +1,153 @@
+﻿@model IEnumerable<ESkript.Models.ScriptContent>
+@foreach (var item in Model) {
+    <div class="accordion-group" id="accordiongroup" style="position: relative; left: 30px;">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#@item.IdScriptContent">
+
+                <h3>
+                    @if (item.ScriptContent1.Count() > 0 ||
+                                                 item.TextCard.Count() > 0 ||
+                                                 item.FormulaCard.Count() > 0 ||
+                                                 item.ImageCard.Count() > 0 ||
+                                                 item.VideoCard.Count() > 0 ||
+                                                 item.LinkCard.Count() > 0 ||
+                                                 item.LiteratureCard.Count() > 0) {
+                        <span id="titel" class="glyphicon glyphicon-minus"></span>
+                    }
+                    @Html.DisplayFor(modelItem => item.Titel):
+                    <a href="#" class="btn btn-default btn-xs"
+                       onclick="location.href='@Url.Action("ReadNext", "ScriptContent", new { id = item.IdScriptContent })'">
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </a>
+
+                </h3>
+            </a>
+
+            @if (item.ContentAttributeList.Count() > 0) {
+                <h4>
+                    @foreach (var attribute in item.ContentAttributeList) {
+                        @Html.DisplayFor(modelAttribute => attribute.ContentAttribute.AttributeName) <span> </span>
+                    }
+                </h4>
+            }
+
+            <button type="button"
+                    class="btn btn-info btn-sm"
+                    onclick="location.href='@Url.Action("CreateTwin", "ScriptContent", new { id = item.IdScriptContent })'">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+
+            <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick="location.href='@Url.Action("CreateSub", "ScriptContent", new { id = item.IdScriptContent })'">
+                <span class="glyphicon glyphicon-plus"></span> Karte
+            </button>
+
+            <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick="location.href='@Url.Action("Edit", "ScriptContent", new { id = item.IdScriptContent })'">
+                <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+            </button>
+
+            <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick="location.href='@Url.Action("Delete", "ScriptContent", new { id = item.IdScriptContent })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+
+            @if (item.TextCard.Count() == 0
+                            && item.FormulaCard.Count() == 0
+                            && item.ImageCard.Count() == 0
+                            && item.VideoCard.Count() == 0
+                            && item.LinkCard.Count() == 0
+                            && item.LiteratureCard.Count() == 0) {
+                <button id="button1" type="button"
+                        class="btn btn-default btn-sm"
+                        data-toggle="collapse" data-target="#@(item.IdScriptContent)b">
+                    <span id="butt" class="glyphicon glyphicon-plus"></span> Inhalt hinzufügen
+                </button>
+
+
+
+                <div id="@(item.IdScriptContent)b" class="accordion-body btn-custom collapse">
+                    <div class="accordion-inner">
+                        <hr />
+
+                        <button type="button"
+                                class="btn btn-primary btn-sm"
+                                onclick="location.href='@Url.Action("CreateText", "TextCard", new { id = item.IdScriptContent})'">
+                            <span class="glyphicon glyphicon-pencil"></span> Text
+                        </button>
+                        <button type="button"
+                                class="btn btn-success btn-sm"
+                                onclick="location.href='@Url.Action("CreateFormula", "FormulaCard", new { id = item.IdScriptContent})'">
+                            $\int$ Formel
+                        </button>
+                        <button type="button"
+                                class="btn btn-info btn-sm"
+                                onclick="location.href='@Url.Action("UploadImage", "ImageCard", new { id = item.IdScriptContent})'">
+                            <span class="glyphicon glyphicon-picture"></span> Bild
+                        </button>
+                        <button type="button"
+                                class="btn btn-warning btn-sm"
+                                onclick="location.href='@Url.Action("UploadVideo", "VideoCard", new { id = item.IdScriptContent})'">
+                            <span class="glyphicon glyphicon-film"></span> Video
+                        </button>
+                        <button id="link" type="button"
+                                class="btn btn-custom btn-sm"
+                                onclick="location.href='@Url.Action("Create", "LinkCard", new { id = item.IdScriptContent})'">
+                            <span class="glyphicon glyphicon-star-empty"></span> Link
+                        </button>
+                        <button id="lit" type="button"
+                                class="btn btn-custom btn-sm"
+                                onclick="location.href='@Url.Action("Create", "LiteratureCard", new { id = item.IdScriptContent})'">
+                            <span class="glyphicon glyphicon-book"></span> Literaturverweis
+                        </button>
+
+                    </div>
+                </div>
+            }
+            @*</div>
+                </div>*@
+        </div>
+
+        <div id="@item.IdScriptContent" class="accordion-body karten-toggle collapse in">
+            <div class="accordion-inner">
+                @if (item.TextCard.Count() > 0) {
+                    @Html.Partial("_ReadTextEditMode", item.TextCard)
+                } else if (item.FormulaCard.Count() > 0) {
+                    @Html.Partial("_ReadFormulaEditMode", item.FormulaCard)
+                } else if (item.ImageCard.Count() > 0) {
+                    @Html.Partial("_ReadImageEditMode", item.ImageCard)
+                } else if (item.VideoCard.Count() > 0) {
+                    @Html.Partial("_ReadVideoEditMode", item.VideoCard)
+                } else if (item.LinkCard.Count() > 0) {
+                    @Html.Partial("_ReadLinkEditMode", item.LinkCard)
+                } else if (item.LiteratureCard.Count() > 0) {
+                    @Html.Partial("_ReadLiteratureEditMode", item.LiteratureCard)
+                }
+
+                @if (item.NoteCard.Count() > 0) {
+                    @Html.Partial("_ReadNote", item.NoteCard.Where(a => a.Account.EMail == User.Identity.Name).First())
+                }
+                @if (item.NoteCard.Count() > 0) {
+                    <a href="#">Comments</a>
+                }
+
+                @if (item.ScriptContent1.Count() > 0) {
+                    @Html.Partial("_ReadSubEditMode", item.ScriptContent1)
+                }
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+

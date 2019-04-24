@@ -1,0 +1,55 @@
+﻿@model ESkript.Models.Script
+
+@{
+    ViewBag.Title = "Skript sperren";
+}
+
+<h2>Skript sperren</h2>
+
+<h3>Wollen Sie wirklich das Skript @Html.DisplayFor(s => s.Subject) in die Werkstatt überführen?</h3>
+<h4>Warnung: Für andere Benutzer ist das Skript nicht mehr sichtbar.</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Autor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.FirstName) @Html.DisplayFor(model => model.Account.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-lock"></span> Sperren
+            </button>
+        </div>
+    }
+</div>
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "Index", "Home")
+</div>

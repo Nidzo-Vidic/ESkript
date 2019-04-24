@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ESkript.Models.ScriptContent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Attribute1.AttributeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Script1.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScriptContent2.Titel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Predecessor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Successor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FatherContent)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attribute1.AttributeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Script1.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScriptContent2.Titel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Predecessor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Successor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FatherContent)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdScriptContent }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdScriptContent }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdScriptContent })
+        </td>
+    </tr>
+}
+
+</table>

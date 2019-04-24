@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ESkript.Models.ContentAttributeList>
+<div class="col-md-offset-2">
+
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onclick="location.href='@Url.Action("Create", "ContentAttributeList", new { id = ViewBag.content })'">
+        <span class="glyphicon glyphicon-plus-sign"></span> Attribut Hinzufügen
+    </button>
+    <br />
+    <h3>Attribute:</h3>
+    @foreach (var item in Model) {
+        <div>
+            <h4>
+                @Html.DisplayFor(modelItem => item.ContentAttribute.AttributeName)
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("Edit", "ContentAttributeList", new { id = item.IdContentAttributeList })'">
+                    <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+                </button>
+
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("Delete", "ContentAttributeList", new { id = item.IdContentAttributeList })'">
+                    <span class="glyphicon glyphicon-trash"></span> Entfernen
+                </button>
+            </h4>
+
+
+
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.IdContentAttributeList }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdContentAttributeList })*@
+        </div>
+        <br />
+    }
+</div>
+

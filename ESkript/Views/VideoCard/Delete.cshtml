@@ -1,0 +1,44 @@
+﻿@model ESkript.Models.VideoCard
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Löschen</h2>
+
+<h3>Sind Sie sicher, dass Sie das Video löschen wollen?</h3>
+<div>
+    <hr />
+
+
+    <div>
+        <h3>@Html.DisplayFor(item => item.ScriptContent.Titel)</h3>
+    </div>
+
+    <div>
+        <video width="500" controls>
+            <source src="data:video/mp4;base64,@Convert.ToBase64String(Model.Video,0,Model.Video.Length)" type="video/mp4">
+        </vide>o
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <div class="form-actions no-color">
+                <button type="submit" value="Löschen" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-trash"></span> Löschen
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = ViewBag.Id }, null)
+</div>

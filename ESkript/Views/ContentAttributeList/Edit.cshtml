@@ -1,0 +1,48 @@
+﻿@model ESkript.Models.ContentAttributeList
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Attribut von @Html.DisplayFor(s => s.ScriptContent1.Titel) bearbeiten</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdContentAttributeList)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Attribute, "Attribute", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownList("Attribute", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Attribute, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.ScriptContent, "ScriptContent", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ScriptContent", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ScriptContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <button type="submit" value="Save" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> Speichern
+                </button>
+            </div>
+        </div>
+    </div>
+}
+<br />
+<div>
+    @Html.ActionLink("Zurück", "Edit", "ScriptContent", new { id = Model.ScriptContent}, null)
+</div>

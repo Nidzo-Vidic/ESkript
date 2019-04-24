@@ -1,0 +1,42 @@
+﻿@model ESkript.Models.ImageCard
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Löschen</h2>
+
+<h3>Sind Sie sicher, dass Sie das Bild löschen wollen?</h3>
+<div>
+
+    <hr />
+
+    <div>
+        <h3>@Html.DisplayFor(model => model.ScriptContent.Titel)</h3>
+    </div>
+
+    <div>
+        <img src="data:image/png;base64,@Convert.ToBase64String(Model.Image,0,Model.Image.Length)" width="500" />
+    </div>
+
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <br />
+        <br />
+        <div class="form-actions no-color">
+            <div class="form-actions no-color">
+                <button type="submit" value="Löschen" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-trash"></span> Löschen
+                </button>
+            </div>
+        </div>
+    }
+</div>
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = Model.ScriptContent.Script }, null)
+</div>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ESkript.Models.TextCard>
+<div style="position: relative; left: 30px;">
+    @foreach (var item in Model) {
+        <h4>
+            Text:
+            <button type="button"
+                    class="btn btn-primary btn-sm"
+                    onclick="location.href='@Url.Action("Edit", "TextCard", new { id = item.IdTextCard })'">
+                <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+            </button>
+
+            <button type="button"
+                    class="btn btn-primary btn-sm"
+                    onclick="location.href='@Url.Action("Delete", "TextCard", new { id = item.IdTextCard })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+        </h4>
+        
+        @*<pre>@if (item.Text != null) {
+            @Html.Raw(item.Text.Replace(Environment.NewLine, "<br />"));
+        }</pre>*@
+
+        if (item.Text != null) {
+            @Html.Raw(item.Text.Replace(Environment.NewLine, "<br />"));
+        }
+    }
+</div>
+
+
+
+
+

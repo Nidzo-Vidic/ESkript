@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ESkript.Models.Script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Verfügbare Skripte</h2>
+
+@if (User.IsInRole("Dozent") || User.IsInRole("Admin")) {
+    <br />
+    <br />
+    <p>
+        <button type="button"
+                class="btn btn-default btn-lg"
+                onclick="location.href='@Url.Action("Create", "Script")'">
+            <span class="glyphicon glyphicon-plus"></span> Skript erstellen
+        </button>
+    </p>
+    <br />
+    <br />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Subject, "Read", "ScriptContent", new { id = item.IdScript }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+
+            <td>
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("Read", "ScriptContent", new { id = item.IdScript })'">
+                    <span class="glyphicon glyphicon-play"></span> Lesen
+                </button>
+
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("ReadFirst", "ScriptContent", new { id = item.IdScript })'">
+                    <span class="glyphicon glyphicon-play-circle"></span> Einzelkarten Ansicht
+                </button>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Dozent")) {
+                    <button type="button"
+                            class="btn btn-default btn-sm"
+                            onclick="location.href='@Url.Action("Revoke", "Script", new { id = item.IdScript })'">
+                        <span class="glyphicon glyphicon-lock"></span> Zur Bearbeitung sperren
+                    </button>
+                }
+            </td>
+        </tr>
+    }
+</table>

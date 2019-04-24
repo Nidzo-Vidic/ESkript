@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ESkript.Models.ContentAttribute>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Attribute von Skript: @ViewBag.ScriptName</h2>
+
+
+<button type="button"
+        class="btn btn-default btn-lg"
+        onclick="location.href='@Url.Action("Create", "ContentAttribute", new { id = ViewBag.Id })'">
+    Neues Attribut
+</button>
+
+@if (User.IsInRole("Admin")) {
+    <button type="button"
+            class="btn btn-primary btn-lg"
+            onclick="location.href='@Url.Action("CreateGlobal", "ContentAttribute", new { id = ViewBag.Id })'">
+        Neues globales Attribut
+    </button>
+}
+
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AttributeName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (item.Script == null) {
+                    <span class="label label-primary">global</span>
+                }
+                @Html.DisplayFor(modelItem => item.AttributeName)
+            </td>
+
+            @if (item.Script == null && User.IsInRole("Admin")) {
+                <td>
+                    <button type="button"
+                            class="btn btn-default btn-sm"
+                            onclick="location.href='@Url.Action("Edit", "ContentAttribute", new { id = item.IdAttribute})'">
+                        <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-default btn-sm"
+                            onclick="location.href='@Url.Action("Delete", "ContentAttribute", new { id = item.IdAttribute })'">
+                        <span class="glyphicon glyphicon-trash"></span> Löschen
+                    </button>
+                </td>
+            } else if (item.Script != null) {
+                <td>
+                    <button type="button"
+                            class="btn btn-default btn-sm"
+                            onclick="location.href='@Url.Action("Edit", "ContentAttribute", new { id = item.IdAttribute})'">
+                        <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-default btn-sm"
+                            onclick="location.href='@Url.Action("Delete", "ContentAttribute", new { id = item.IdAttribute })'">
+                        <span class="glyphicon glyphicon-trash"></span> Löschen
+                    </button>
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = ViewBag.Id }, null)
+</div>

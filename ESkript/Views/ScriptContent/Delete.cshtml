@@ -1,0 +1,77 @@
+﻿<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="~/Scripts/togglespan.js"></script>
+@model ESkript.Models.ScriptContent
+<script src="~/Scripts/toggleall.js"></script>
+@{
+    ViewBag.Title = "Inhalt löschen";
+}
+
+<h2>Inhalt Löschen</h2>
+
+<h3>Alle unteren Karten und Inhalte(Texte, Formeln, Bilder, Videos, usw.) werden gelöscht. Möchten Sie fortfahren?</h3>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <button type="submit" value="Löschen" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-trash"></span> Löschen
+        </button>
+    </div>
+}
+<br />
+<br />
+<button id="collapse-init" class="btn btn-primary">
+    Alles aufklappen
+</button>
+
+<div>
+    <hr />
+    <h3>
+        @if (Model.ScriptContent1.Count() > 0 ||
+             Model.TextCard.Count() > 0 ||
+             Model.FormulaCard.Count() > 0 ||
+             Model.ImageCard.Count() > 0 ||
+             Model.VideoCard.Count() > 0 ||
+             Model.LinkCard.Count() > 0 ||
+             Model.LiteratureCard.Count() > 0) {
+            <span id="titel" class="glyphicon glyphicon-minus"></span>
+        }
+        @Html.DisplayFor(model => model.Titel)
+    </h3>
+    <h4>
+        @if (Model.ContentAttributeList.Count() > 0) {
+                foreach (var attribute in Model.ContentAttributeList) {
+                    @Html.DisplayFor(modelAttribute => attribute.ContentAttribute.AttributeName) <span> </span>
+                }
+        }
+    </h4>
+
+    @if (Model.TextCard.Count() > 0) {
+        @Html.Partial("_ReadText", Model.TextCard)
+    }
+    @if (Model.FormulaCard.Count() > 0) {
+        @Html.Partial("_ReadFormula", Model.FormulaCard)
+    }
+    @if (Model.ImageCard.Count() > 0) {
+        @Html.Partial("_ReadImage", Model.ImageCard)
+    }
+
+    @if (Model.ScriptContent1 != null) {
+        @Html.Partial("_ReadSub", Model.ScriptContent1)
+    }
+
+</div>
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = Model.Script }, null)
+</div>

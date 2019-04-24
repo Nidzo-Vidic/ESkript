@@ -1,0 +1,33 @@
+﻿@model  IEnumerable<ESkript.Models.FormulaCard>
+
+@foreach (var item in Model) {
+    <div>
+        <div>
+            <h4>
+                Formel:
+                <button type="button"
+                        class="btn btn-success btn-sm"
+                        onclick="location.href='@Url.Action("Edit", "FormulaCard", new { id = item.IdFormulaCard })'">
+                    <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+                </button>
+
+                <button type="button"
+                        class="btn btn-success btn-sm"
+                        onclick="location.href='@Url.Action("Delete", "FormulaCard", new { id = item.IdFormulaCard })'">
+                    <span class="glyphicon glyphicon-trash"></span> Löschen
+                </button>
+            </h4>
+
+
+
+        </div>
+        <h4>
+            $$@Html.DisplayFor(modelItem => item.Formula)$$
+        </h4>
+    </div>
+}
+
+
+
+
+
