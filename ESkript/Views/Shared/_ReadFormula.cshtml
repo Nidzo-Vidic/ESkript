@@ -1,0 +1,16 @@
+﻿@model  IEnumerable<ESkript.Models.FormulaCard>
+
+@foreach (var item in Model) {
+    <div>
+            <h4>
+                $$@Html.DisplayFor(modelItem => item.Formula)$$
+            </h4>
+    </div>
+}
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ESkript.Models.LiteratureCard>
+<style>
+    li {
+        margin-top: 1em;
+    }
+</style>
+@foreach (var item in Model) {
+    <div style="position: relative; left: 30px;">
+
+        <h5>
+            Literaturverweis:
+            <button id="lit" type="button"
+                    class="btn btn-custom btn-sm"
+                    onclick="location.href='@Url.Action("Edit", "LiteratureCard", new { id = item.IdLiterature})'">
+                <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+            </button>
+
+            <button id="lit" type="button"
+                    class="btn btn-custom btn-sm"
+                    onclick="location.href='@Url.Action("Delete", "LiteratureCard", new { id = item.IdLiterature })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+
+            <button id="lit" type="button"
+                    class="btn btn-custom btn-sm"
+                    onclick="location.href='@Url.Action("Create", "LiteratureCard", new { id = item.ScriptContent.IdScriptContent})'">
+                <span class="glyphicon glyphicon-book"></span> Literaturverweis
+            </button>
+        </h5>
+
+
+        <ul>
+            <li>
+                @Html.DisplayFor(modelItem => item.Authors):
+                @Html.DisplayFor(modelItem => item.Titel).
+                <br />
+                Verlag:
+                @Html.DisplayFor(modelItem => item.Publisher),
+                Edition:
+                @Html.DisplayFor(modelItem => item.Edition),
+                Ort:
+                @Html.DisplayFor(modelItem => item.Location),
+                @Html.DisplayFor(modelItem => item.Year)
+            </li>
+        </ul>
+    </div>
+}
+

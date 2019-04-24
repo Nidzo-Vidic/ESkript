@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ESkript.Models.CommentCard>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScriptContent1.Titel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScriptContent1.Titel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdComment }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdComment }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdComment })
+        </td>
+    </tr>
+}
+
+</table>

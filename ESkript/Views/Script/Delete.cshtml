@@ -1,0 +1,54 @@
+﻿@model ESkript.Models.Script
+
+@{
+    ViewBag.Title = "Skript Löschen";
+}
+
+<h3>Sind Sie sicher, dass Sie das Skript @Model.Subject löschen wollen?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Autor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.FirstName) @Html.DisplayFor(model => model.Account.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <div class="form-actions no-color">
+                <button type="submit" value="Löschen" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-trash"></span> Löschen
+                </button>
+            </div> 
+        </div>
+    }
+</div>
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = Model.IdScript}, null)
+</div>

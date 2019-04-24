@@ -1,0 +1,66 @@
+﻿@model ESkript.Models.ScriptContent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ScriptContent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Attribute1.AttributeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attribute1.AttributeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Script1.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Script1.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Predecessor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Predecessor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Successor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Successor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdScriptContent }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ESkript.Models.LinkCard>
+<style>
+    li {
+        margin-top: 1em;
+    }
+</style>
+@*<h4>
+    Link:
+</h4>*@
+@foreach (var item in Model) {
+    <div style="position: relative; left: 30px;">
+        <ul>
+            <li>
+                <a href="@Html.DisplayFor(modelItem => item.Link)" target="_blank">@Html.DisplayFor(modelItem => item.Link)</a>
+            </li>
+        </ul>
+    </div>
+}
+
+
+
+

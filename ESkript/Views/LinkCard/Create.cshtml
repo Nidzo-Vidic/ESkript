@@ -1,0 +1,37 @@
+﻿@model ESkript.Models.LinkCard
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Link speichern</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-offset-4">
+        <button type="submit" class="btn btn-default">
+            Erstellen
+        </button>
+    </div>
+}
+
+<br />
+<br />
+<br />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new {id = ViewBag.Id}, null)
+</div>

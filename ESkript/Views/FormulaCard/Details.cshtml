@@ -1,0 +1,42 @@
+﻿@model ESkript.Models.FormulaCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FormulaCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment.IdComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment.IdComment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptContent.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptContent.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Formula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Formula)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdFormulaCard }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

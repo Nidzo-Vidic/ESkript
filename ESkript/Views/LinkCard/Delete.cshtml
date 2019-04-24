@@ -1,0 +1,41 @@
+﻿@model ESkript.Models.LinkCard
+
+@{
+    ViewBag.Title = "Link löschen";
+}
+
+<h3>Sind Sie sicher, dass Sie den Link löschen wollen?</h3>
+<div>
+    <hr />
+    <div>
+        <h3>
+            @Html.DisplayFor(model => model.ScriptContent.Titel)
+        </h3>
+    </div>
+    <br />
+    <br />
+
+    <div>
+        <h3>
+            <a href="@Html.DisplayFor(item => item.Link)" target="_blank">@Html.DisplayFor(item => item.Link)</a>
+        </h3>
+    </div>
+    <br />
+    <br />
+    <br />
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" value="Löschen" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+        </div>
+    }
+</div>
+<br />
+<br />
+<br />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = Model.ScriptContent.Script }, null)
+</div>

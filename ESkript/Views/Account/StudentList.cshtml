@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ESkript.Models.Account>
+
+@{
+    ViewBag.Title = "StudentList";
+}
+
+<h2>StudentList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Role.RoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role.RoleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick="location.href='@Url.Action("Edit", "Account", new { id = item.IdAccount })'">
+                <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+            </button>
+
+            <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick="location.href='@Url.Action("Delete", "Account", new { id = item.IdAccount })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

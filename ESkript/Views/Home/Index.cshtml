@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Willkommen auf der E-Skript-System Seite der Universität Ulm</h2>
+@if (User.Identity.IsAuthenticated) {
+    <h1>Hallo @User.Identity.Name</h1>
+}

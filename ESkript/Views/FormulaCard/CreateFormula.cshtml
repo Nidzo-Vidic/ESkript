@@ -1,0 +1,41 @@
+﻿@model ESkript.Models.FormulaCard
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Formel für @ViewBag.Titel erstellen</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            <h3>
+                @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2" })
+            </h3>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Formula, 20, 150, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Formula, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Erstellen" class="btn btn-default btn-lg" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = @ViewBag.Id }, null)
+</div>
+

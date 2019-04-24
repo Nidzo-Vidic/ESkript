@@ -1,0 +1,29 @@
+﻿@model ESkript.Models.ImageCard
+
+@{
+    ViewBag.Title = "UploadImage";
+}
+
+@using (Html.BeginForm("UploadImage", "ImageCard", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    <div>
+        <h3>@ViewBag.Msg</h3>
+        <h2>Bild für @ViewBag.Titel auswählen: </h2>
+        <br />
+        <h3>
+            @Html.TextBoxFor(model => model.Image, new { type = "file" })
+        </h3>
+        <br />
+        <h2>
+            <input class="btn btn-default btn-lg" type="submit" value="Erstellen" />
+        </h2>
+    </div>
+}
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = @ViewBag.Id }, null)
+</div>
+

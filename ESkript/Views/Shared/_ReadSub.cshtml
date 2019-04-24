@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ESkript.Models.ScriptContent>
+@foreach (var item in Model) {
+    <div class="accordion-group" id="accordiongroup" style="position: relative; left: 30px;">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#@item.IdScriptContent">
+
+                <h3>
+                    @if (item.ScriptContent1.Count() > 0 ||
+                         item.TextCard.Count() > 0 ||
+                         item.FormulaCard.Count() > 0 ||
+                         item.ImageCard.Count() > 0 ||
+                         item.VideoCard.Count() > 0 ||
+                         item.LinkCard.Count() > 0 ||
+                         item.LiteratureCard.Count() > 0) {
+                        <span id="titel" class="glyphicon glyphicon-plus"></span>
+                    }
+                    @Html.DisplayFor(modelItem => item.Titel)
+
+                    <a href="#" class="btn btn-default btn-xs"
+                       onclick="location.href='@Url.Action("ReadNext", "ScriptContent", new { id = item.IdScriptContent })'">
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </a>
+                </h3>
+            </a>
+            @if (item.ContentAttributeList.Count() > 0) {
+                <h4>
+                    @foreach (var attribute in item.ContentAttributeList) {
+                        @Html.DisplayFor(modelAttribute => attribute.ContentAttribute.AttributeName) <span> </span>
+                    }
+                </h4>
+            }
+            
+            
+        </div>
+        <div id="@item.IdScriptContent" class="accordion-body karten-toggle collapse">
+            <div class="accordion-inner">
+                @if (item.TextCard.Count() > 0) {
+                    @Html.Partial("_ReadText", item.TextCard)
+                }
+                @if (item.FormulaCard.Count() > 0) {
+                    @Html.Partial("_ReadFormula", item.FormulaCard)
+                }
+                @if (item.ImageCard.Count() > 0) {
+                    @Html.Partial("_ReadImage", item.ImageCard)
+                }
+                @if (item.VideoCard.Count() > 0) {
+                    @Html.Partial("_ReadVideo", item.VideoCard)
+                }
+                @if (item.LinkCard.Count() > 0) {
+                    @Html.Partial("_ReadLink", item.LinkCard)
+                }
+                @if (item.LiteratureCard.Count() > 0) {
+                    @Html.Partial("_ReadLiterature", item.LiteratureCard)
+                }
+
+                <br />
+                <button id="button1" type="button"
+                        class="btn btn-default btn-xs"
+                        data-toggle="collapse" data-target="#@(item.IdScriptContent)b">
+                    <span id="butt" class="glyphicon glyphicon-plus"></span> Kommentar
+                </button>
+
+                <div id="@(item.IdScriptContent)b" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <hr />
+                        <button type="button"
+                                class="btn btn-warning btn-sm"
+                                onclick="location.href='@Url.Action("Create", "CommentCard", new { id = item.IdScriptContent})'">
+                            <span class="glyphicon glyphicon-pencil"></span> Kommentar
+                        </button>
+
+                        <br />
+                        <br />
+                    </div>
+                </div>
+
+                <div>
+                    <br />
+                    @if (item.CommentCard.Count() > 0) {
+                        @Html.Partial("_ReadComment", item.CommentCard)
+                    }
+                </div>
+
+                
+                @if (item.NoteCard.Count() > 0) {
+                    @Html.Partial("_ReadNote", item.NoteCard.Where(a => a.Account.EMail == User.Identity.Name).First())
+                }
+
+                <br />
+
+
+                @if (item.ScriptContent1.Count() > 0) {
+                    @Html.Partial("_ReadSub", item.ScriptContent1)
+                }
+                
+
+            </div>
+        </div>
+    </div>
+}

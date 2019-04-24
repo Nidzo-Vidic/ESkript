@@ -1,0 +1,123 @@
+﻿@model ESkript.Models.ScriptContent
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="~/Scripts/toggleall.js"></script>
+
+@{
+    ViewBag.Title = "ReadPresentation";
+}
+<br />
+<br />
+<button type="button"
+        class="btn btn-default btn-sm"
+        onclick="location.href='@Url.Action("Read", "ScriptContent", new { id = ViewBag.Id })'">
+    <span class="glyphicon glyphicon-play"></span> Lesen
+</button>
+
+@if (ViewBag.Status == true) {
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onclick="location.href='@Url.Action("ReadEditMode", "ScriptContent", new { id = ViewBag.Id })'">
+        <span class="glyphicon glyphicon-cog"></span> Bearbeitungsmodus
+    </button>
+}
+<div class="text-center col-md-12 col-md-offset-3">
+    <h1>
+        @Html.DisplayFor(model => model.Script1.Subject)
+    </h1>
+</div>
+
+
+<div class="text-center col-md-12 col-md-offset-3">
+    <h2>
+        @Html.DisplayFor(model => model.Titel)
+    </h2>
+</div>
+
+
+
+
+
+
+<div class="col-md-12 col-md-offset-3">
+
+    @if (Model.TextCard.Count() > 0) {
+        @Html.Partial("_ReadText", Model.TextCard)
+    }
+    @if (Model.FormulaCard.Count() > 0) {
+        @Html.Partial("_ReadFormula", Model.FormulaCard)
+    }
+
+    <div class="col-md-offset-3">
+        @if (Model.ImageCard.Count() > 0) {
+            <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageCard.First().Image,0,Model.ImageCard.First().Image.Length)"
+                 width="600" class="img-responsive center-block" />
+        }
+        @if (Model.VideoCard.Count() > 0) {
+            @Html.Partial("_ReadVideo", Model.VideoCard)
+        }
+    </div>
+
+    @if (Model.LinkCard.Count() > 0) {
+        @Html.Partial("_ReadLink", Model.LinkCard)
+    }
+    @if (Model.LiteratureCard.Count() > 0) {
+        @Html.Partial("_ReadLiterature", Model.LiteratureCard)
+    }
+    <button id="button1" type="button"
+            class="btn btn-default btn-xs"
+            data-toggle="collapse" data-target="#@(Model.IdScriptContent)b">
+        <span id="butt" class="glyphicon glyphicon-plus"></span>
+    </button>
+
+    <div id="@(Model.IdScriptContent)b" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <hr />
+            <button type="button"
+                    class="btn btn-warning btn-sm"
+                    onclick="location.href='@Url.Action("Create", "CommentCard", new { id = Model.IdScriptContent})'">
+                <span class="glyphicon glyphicon-pencil"></span> Kommentar
+            </button>
+            @*<button type="button"
+                        class="btn btn-success btn-sm"
+                        onclick="location.href='@Url.Action("Create", "Note", new { id = item.IdScriptContent})'">
+                    <span class="glyphicon glyphicon-pencil"></span> Notiz
+                </button>*@
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <br />
+    @if (Model.CommentCard.Count() > 0) {
+        @Html.Partial("_ReadComment", Model.CommentCard)
+    }
+
+    <nav>
+        <ul class="pager">
+            @if (ViewBag.Predecessor != null) {
+                <li class="previous">
+                    <a onclick="location.href='@Url.Action("ReadNext", "ScriptContent", new { id = ViewBag.Predecessor })'">
+                        <span aria-hidden="true">&larr;</span> Vorhärige Karte
+                    </a>
+                </li>
+            }
+            @if (ViewBag.nextContent != null) {
+                <li class="next">
+                    <a onclick="location.href='@Url.Action("ReadNext", "ScriptContent", new { id = ViewBag.nextContent })'">
+                        Nächste Karte
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

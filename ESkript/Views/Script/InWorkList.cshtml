@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ESkript.Models.Script>
+
+@{
+    ViewBag.Title = "InWorkList";
+}
+
+<h2>Skripte in Bearbeitung</h2>
+@if (User.IsInRole("Dozent") || User.IsInRole("Admin")) {
+    <br />
+    <br />
+    <p>
+        <h3>
+            <button type="button"
+                    class="btn btn-default btn-lg"
+                    onclick="location.href='@Url.Action("Create", "Script")'">
+                <span class="glyphicon glyphicon-plus"></span> Skript erstellen
+            </button>
+        </h3>
+    </p>
+    <br />
+    <br />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InWork)
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Subject, "Read", "ScriptContent", new { id = item.IdScript }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(itemModel => item.CreationDate)
+            </td>
+            <td>
+                @if (item.InWork == true) {
+                    <p>Wird bearbeitet</p>
+                } else {
+                    <p>Fertiggestellt</p>
+                }
+            </td>
+            <td>
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("Read", "ScriptContent", new { id = item.IdScript })'">
+                    <span class="glyphicon glyphicon-play"></span> Lesen
+                </button>
+
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("ReadFirst", "ScriptContent", new { id = item.IdScript })'">
+                    <span class="glyphicon glyphicon-play-circle"></span> Einzelkarten Ansicht
+                </button>
+
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("ReadEditMode", "ScriptContent", new { id = item.IdScript })'">
+                    <span class="glyphicon glyphicon-cog"></span> Bearbeitungsmodus
+                </button>
+
+                <button type="button"
+                        class="btn btn-default btn-sm"
+                        onclick="location.href='@Url.Action("Publish", "Script", new { id = item.IdScript })'">
+                    <span class="glyphicon glyphicon-cloud-upload"></span> Veröffentlichen
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

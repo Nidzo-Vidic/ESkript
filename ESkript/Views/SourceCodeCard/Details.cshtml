@@ -1,0 +1,34 @@
+﻿@model ESkript.Models.SourceCodeCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SourceCodeCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptContent.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptContent.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourcceCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourcceCode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdSourceCodeCard }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

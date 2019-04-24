@@ -1,0 +1,48 @@
+﻿<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+    "HTML-CSS": { linebreaks: { automatic: true } }
+    });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+@model ESkript.Models.FormulaCard
+
+@{
+    ViewBag.Title = "Formel löschen?";
+}
+<h3>Sind Sie sicher, dass Sie die Formel löschen wollen?</h3>
+<div>
+    <hr />
+
+        <div>
+            <h3>@Html.DisplayNameFor(model => model.ScriptContent.Titel)</h3>
+        </div>
+
+        <div>
+            <h3>@Html.DisplayFor(model => model.ScriptContent.Titel)</h3>
+        </div>
+
+        <div>
+            @Html.Partial("_ReadFormula", Model.ScriptContent.FormulaCard)
+        </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <div class="form-actions no-color">
+                <button type="submit" value="Löschen" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-trash"></span> Löschen
+                </button>
+            </div>
+        </div>
+
+    }
+</div>
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = Model.ScriptContent.Script }, null)
+</div>

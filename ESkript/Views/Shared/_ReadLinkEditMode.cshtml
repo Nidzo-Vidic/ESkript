@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ESkript.Models.LinkCard>
+<style>
+    li {
+        margin-top: 1em;
+    }
+</style>
+
+@foreach (var item in Model) {
+    <div style="position: relative; left: 30px;">
+        <h4>
+            Link:
+
+            <button id="link" type="button"
+                    class="btn btn-custom btn-sm"
+                    onclick="location.href='@Url.Action("Edit", "LinkCard", new { id = item.IdLink})'">
+                <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+            </button>
+
+            <button id="link" type="button"
+                    class="btn btn-custom btn-sm"
+                    onclick="location.href='@Url.Action("Delete", "LinkCard", new { id = item.IdLink })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+
+            <button id="link" type="button"
+                    class="btn btn-custom btn-sm"
+                    onclick="location.href='@Url.Action("Create", "LinkCard", new { id = item.ScriptContent.IdScriptContent})'">
+                <span class="glyphicon glyphicon-star-empty"></span> Link
+            </button>
+
+        </h4>
+        <ul>
+            <li>
+                <a href="@Html.DisplayFor(modelItem => item.Link)" target="_blank">@Html.DisplayFor(modelItem => item.Link)</a>
+            </li>
+        </ul>
+    </div>
+}
+
+
+

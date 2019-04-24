@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ESkript.Models.CommentCard>
+
+<br />
+@*<h4>
+
+        Text:
+    </h4>*@
+<h4>Kommentare</h4>
+<div style="position: relative; left: 30px;">
+    @foreach (var item in Model) {
+
+        
+        <h5>@Html.DisplayFor(modelItem => item.Account.FirstName) @Html.DisplayFor(modelItem => item.Account.LastName):</h5>
+        if (User.IsInRole("Admin") || User.IsInRole("Admin") || User.IsInRole("Dozent") || item.Account.EMail == User.Identity.Name) {
+            <button type="button"
+                    class="btn btn-primary btn-xs"
+                    onclick="location.href='@Url.Action("Edit", "CommentCard", new { id = item.IdComment })'">
+                <span class="glyphicon glyphicon-cog"></span> Bearbeiten
+            </button>
+
+            <button type="button"
+                    class="btn btn-primary btn-xs"
+                    onclick="location.href='@Url.Action("Delete", "CommentCard", new { id = item.IdComment })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+        }
+        <br />
+        <br />
+        if (item.Text != null) {
+            @Html.Raw(item.Text.Replace(Environment.NewLine, "<br />"));
+
+        <br />
+        }
+        <hr />
+    }
+
+</div>

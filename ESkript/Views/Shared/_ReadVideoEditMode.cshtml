@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ESkript.Models.VideoCard>
+
+@foreach (var item in Model) {
+    <div style="position: relative; left: 30px;">
+        <h4>
+            Video:
+            <button type="button"
+                    class="btn btn-warning btn-sm"
+                    onclick="location.href='@Url.Action("Delete", "VideoCard", new { id = item.IdVideoCard })'">
+                <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+        </h4>
+        <video width="500" controls>
+            <source src="data:video/mp4;base64,@Convert.ToBase64String(item.Video,0,item.Video.Length)" type="video/mp4">
+        </video>
+    </div>
+}
+
+

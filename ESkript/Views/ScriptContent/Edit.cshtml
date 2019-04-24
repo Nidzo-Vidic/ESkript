@@ -1,0 +1,72 @@
+﻿@model ESkript.Models.ScriptContent
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Bearbeiten</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ScriptContent</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdScriptContent)
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Script, "Script", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.DropDownList("Script", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Script, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Titel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Titel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Titel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group" >
+            @Html.LabelFor(model => model.FatherContent, "FatherContent", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.DropDownList("FatherContent", null, "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FatherContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"hidden>
+            @Html.LabelFor(model => model.Predecessor, "Predecessor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.DropDownList("Predecessor", null, "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Predecessor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @Html.Partial("_ContentList",Model.ContentAttributeList)
+
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" value="Save" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> Speichern
+                </button>
+            </div>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Zurück", "ReadEditMode", "ScriptContent", new { id = ViewBag.Id }, null)
+</div>
+
